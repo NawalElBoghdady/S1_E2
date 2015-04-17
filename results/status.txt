@@ -1,1 +1,1 @@
-test-bla2 : test : 20/38
+test-bla-nanu : test : 17/32

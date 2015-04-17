@@ -113,13 +113,13 @@ function [y, fs] = straight_process(syll, t_f0, ser, options)
 wavIn = fullfile(options.sound_path, [syll, '.wav']);
 wavOut = make_fname(wavIn, t_f0, ser, options.syllable_duration, options.tmp_path);
 
-% if ~exist('audioread')
-%     audioread = @wavread;
-% end
-% 
-% if ~exist('audiowrite')
-%     audiowrite = @(fname, x, fs) wavwrite(x,fs,fname);
-% end
+if ~exist('audioread')
+    audioread = @wavread;
+end
+
+if ~exist('audiowrite')
+    audiowrite = @(fname, x, fs) wavwrite(x,fs,fname);
+end
 
 if ~exist(wavOut, 'file') || options.force_rebuild_sylls
     

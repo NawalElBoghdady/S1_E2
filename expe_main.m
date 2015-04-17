@@ -55,9 +55,16 @@ while mean([expe.( phase ).conditions.done])~=1 % Keep going while there are som
     fprintf('\n============================ Testing condition %d / %d ==========\n', i_condition, length(expe.( phase ).conditions))
     condition = expe.( phase ).conditions(i_condition);
     
-    if condition.session > session %If the first session is done
-        questdlg2(sprintf('Session "%s" is finished. Thank you!', strrep(num2str(session), '_', ' ')),h,'OK','OK');
-        break
+    if condition.session ~= session %Check session number
+        if condition.session < session
+            questdlg2(sprintf('Session "%s" is incomplete. Kindly complete that session first.', strrep(num2str(condition.session), '_', ' ')),h,'OK','OK');
+            break
+        else
+            questdlg2(sprintf('Session "%s" is complete. Thank you!', strrep(num2str(session), '_', ' ')),h,'OK','OK');
+            % Save the response
+            save(options.res_filename, 'options', 'expe', 'results')
+            break
+        end
     end
 
     if condition.vocoder==0

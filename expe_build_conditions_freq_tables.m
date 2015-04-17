@@ -95,13 +95,13 @@ options.training.voices = options.test.voices;
 options.test.voice_pairs = [...
 %    1 2;  % Female -> Male
 %    1 4;  % Female -> Male GPR
-    1 5;  % Female -> Male VTL
+    1 5];  % Female -> Male VTL
 %    1 3;  % Female -> Child
 %    1 6;  % Female -> Child GPR
-    1 7]; % Female -> Child VTL
+%    1 7]; % Female -> Child VTL
 options.training.voice_pairs = [...
-    1 5;  % Female -> Male VTL
-    1 7]; % Female -> Child VTL
+    1 5];  % Female -> Male VTL
+%    1 7]; % Female -> Child VTL
 
 % if ~test_machine %If it's computer in Stille Kamer
 %     options.sound_path = '~/projects/00 stimuli/Dutch_CV/equalized';
@@ -213,7 +213,7 @@ range = [170 8700];
 %tables = {'greenwood','lin','ci24','hr90k'};
 %Train on only one FAT:
 %===============================
-tables = {'lin'};
+tables = {'hr90k'};
 
 %ins_depth = [21.5, 18.5]; %shallow = 18.5mm, %deep insertion = 21.5mm for HiFocus => data from AB surgeon's guide for HiRes90K implant
 %Train on only one vocoder type:
@@ -249,7 +249,7 @@ test = struct();
 for ir = 1:options.test.n_repeat
     baseline = 1;
     
-    for i = 1:8 %Equate total number of sessions to that of those used in the actual FAT experiment
+    for i = 1:14 %Equate total number of sessions to that of those used in the actual FAT experiment
         for i_voc = 1:length(options.vocoder)
             for i_vp = 1:size(options.test.voice_pairs, 1)
                 
@@ -275,7 +275,7 @@ for ir = 1:options.test.n_repeat
                         
                         test.conditions = orderfields(condition);
                         test.conditions(end+1) = orderfields(condition);
-                        test.conditions(end+1) = orderfields(condition);
+                        %test.conditions(end+1) = orderfields(condition);
                         
                         baseline = 0;
                         condition.baseline = baseline;
@@ -289,7 +289,7 @@ for ir = 1:options.test.n_repeat
                     
                         test.conditions(end+1) = orderfields(condition);
                         test.conditions(end+1) = orderfields(condition);
-                        test.conditions(end+1) = orderfields(condition);
+                        %test.conditions(end+1) = orderfields(condition);
                         
                         baseline = 0;
                         condition.baseline = 0;
